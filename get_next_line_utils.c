@@ -6,9 +6,7 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -19,18 +17,14 @@ char	*ft_strchr(char *str, int c)
 
 	i = 0;
 	d = (unsigned char)c;
-	while (1)
+	while (str[i])
 	{
-		if ((unsigned char)s[i] == d)
-		{
-			return ((char *)&s[i]);
-		}
-		if (s[i] == '\0')
-		{
-			return (NULL);
-		}
+		if ((unsigned char)str[i] == d)
+			return ((char *)&str[i]);
 		i++;
 	}
+	if (str[i] == d)
+		return ((char *)&str[i]);
 	return (NULL);
 }
 
@@ -43,14 +37,10 @@ char	*ft_strchr(char *str, int c)
 	d = (unsigned char)c;
 	while (1)
 	{
-		if ((unsigned char)s[i] == d)
-		{
-			return ((char *)&s[i]);
-		}
-		if (s[i] == '\0')
-		{
+		if ((unsigned char)str[i] == d)
+			return ((char *)&str[i]);
+		if (str[i] == '\0')
 			return (NULL);
-		}
 		i++;
 	}
 	return (NULL);
@@ -80,12 +70,12 @@ char	*ft_substr(const char *str, size_t start, size_t len)
 	char	*sub;
 	size_t	i;
 
-	if (!c)
+	if (!str)
 		return (NULL);
 	if (start >= ft_strlen(str))
 		return (ft_strdup(""));
 	if (len > ft_strlen(str + start))
-		atual_len = ft_strlen(c + start);
+		atual_len = ft_strlen(str + start);
 	else
 		atual_len = len;
 	sub = (char *)ft_calloc(atual_len + 1, sizeof(char));
