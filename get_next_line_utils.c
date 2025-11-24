@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 22:07:37 by aneves            #+#    #+#             */
+/*   Updated: 2025/11/24 22:07:38 by aneves           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str)
@@ -28,31 +40,13 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strchr(char *str, int c)
-{
-	unsigned char	d;
-	size_t			i;
-
-	i = 0;
-	d = (unsigned char)c;
-	while (1)
-	{
-		if ((unsigned char)str[i] == d)
-			return ((char *)&str[i]);
-		if (str[i] == '\0')
-			return (NULL);
-		i++;
-	}
-	return (NULL);
-}
-
 char	*ft_strdup(const char *str)
 {
 	int		i;
 	char	*copy;
 
 	i = 0;
-	copy = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	copy = malloc(ft_strlen(str) + 1 * sizeof(char));
 	if (!copy)
 		return (NULL);
 	while (str[i])
@@ -78,7 +72,7 @@ char	*ft_substr(const char *str, size_t start, size_t len)
 		atual_len = ft_strlen(str + start);
 	else
 		atual_len = len;
-	sub = (char *)ft_calloc(atual_len + 1, sizeof(char));
+	sub = (char *)malloc(atual_len + 1 * sizeof(char));
 	if (!sub)
 		return (NULL);
 	i = 0;
@@ -115,6 +109,6 @@ char	*ft_strjoin(char *s1, const char *s2)
 		j++;
 	}
 	copy[i + j] = '\0';
-    free(s1);
+	free(s1);
 	return (copy);
 }
