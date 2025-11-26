@@ -42,13 +42,17 @@ static char	*set_line(char *line)
 {
 	char	*left;
 	ssize_t	i;
+	size_t	j;
 
 	i = 0;
+	j = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 		i++;
 	if (line[i] == 0 || line[1] == 0)
 		return (NULL);
-	left = ft_substr(line, i + 1, ft_strlen(line) - i);
+	while (line[j])
+		j++;
+	left = ft_substr(line, i + 1, j - i);
 	if (*left == 0)
 	{
 		free(left);
@@ -76,14 +80,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = fill_line(fd, left, buffer);
-	free(buffer);
-	buffer = NULL;
 	if (!line)
 	{
 		free(left);
 		left = NULL;
 		return (NULL);
 	}
+	free(buffer);
+	buffer = NULL;
 	left = set_line(line);
 	return (line);
 }
