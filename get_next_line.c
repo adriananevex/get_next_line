@@ -6,7 +6,7 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:33 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/24 22:12:39 by aneves           ###   ########.fr       */
+/*   Updated: 2025/11/26 20:50:50 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*fill_line(int fd, char *left, char *buffer)
 	ssize_t	b_read;
 	char	*tmp;
 
+	if (left && ft_strchr(left, '\n'))
+			return (left);
 	b_read = 1;
 	while (b_read > 0)
 	{
@@ -48,17 +50,19 @@ static char	*set_line(char *line)
 	j = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 		i++;
-	if (line[i] == 0 || line[1] == 0)
+	if (line[i] == '\0')
 		return (NULL);
 	while (line[j])
 		j++;
-	left = ft_substr(line, i + 1, j - i);
-	if (*left == 0)
+	left = ft_substr(line, i + 1, j - (i + 1));
+	if (!left)
+		return (NULL);
+	if (*left == '\0')
 	{
 		free(left);
 		left = NULL;
 	}
-	line[i + 1] = 0;
+	line[i + 1] = '\0';
 	return (left);
 }
 

@@ -6,21 +6,11 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:37 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/24 22:07:38 by aneves           ###   ########.fr       */
+/*   Updated: 2025/11/26 20:38:11 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strchr(char *str, int c)
 {
