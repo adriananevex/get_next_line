@@ -54,7 +54,7 @@ static char	*set_line(char *line)
 		return (NULL);
 	while (line[j])
 		j++;
-	left = ft_substr(line, i + 1, j - (i + 1));
+	left = ft_substr(line, i + 1, ft_strlen(line) - (i + 1));
 	if (!left)
 		return (NULL);
 	if (*left == '\0')
