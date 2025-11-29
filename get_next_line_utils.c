@@ -6,11 +6,39 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:37 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/26 20:38:11 by aneves           ###   ########.fr       */
+/*   Updated: 2025/11/29 19:38:10 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_read(int fd, char *str)
+{
+	char	*buffer;
+	char	*tmp;
+	ssize_t	n;
+
+	if (!str)
+		str = ft_substr("", 0, 0);
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	while (!ft_strchr(str, '\n'))
+	{
+		n = read(fd, buffer, BUFFER_SIZE);
+		if (n <= 0)
+			break ;
+		buffer[n] = '\0';
+		tmp = str;
+		str = ft_strjoin(tmp, buffer);
+		if (!str)
+			return (free(buffer), free(tmp), NULL);
+	}
+	free(buffer);
+	if (!*str)
+		return (free(str), NULL);
+	return (str);
+}
 
 size_t	ft_strlen(const char *c)
 {
@@ -42,24 +70,6 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *str)
-{
-	int		i;
-	char	*copy;
-
-	i = 0;
-	copy = malloc(ft_strlen(str) + 1 * sizeof(char));
-	if (!copy)
-		return (NULL);
-	while (str[i])
-	{
-		copy[i] = str[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
-}
-
 char	*ft_substr(const char *str, size_t start, size_t len)
 {
 	size_t	atual_len;
@@ -69,12 +79,14 @@ char	*ft_substr(const char *str, size_t start, size_t len)
 	if (!str)
 		return (NULL);
 	if (start >= ft_strlen(str))
-		return (ft_strdup(""));
+	{
+		len = 0;
+	}
 	if (len > ft_strlen(str + start))
 		atual_len = ft_strlen(str + start);
 	else
 		atual_len = len;
-	sub = (char *)malloc(atual_len + 1 * sizeof(char));
+	sub = (char *)malloc((atual_len + 1) * sizeof(char));
 	if (!sub)
 		return (NULL);
 	i = 0;

@@ -3,93 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: neves <neves@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:33 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/28 22:32:07 by neves            ###   ########.fr       */
+/*   Updated: 2025/11/29 19:36:30 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*fill_line(int fd, char *left, char *buffer)
-{
-	ssize_t	b_read;
-	char	*tmp;
-
-	if (left && ft_strchr(left, '\n'))
-			return (left);
-	b_read = 1;
-	while (b_read > 0)
-	{
-		b_read = read(fd, buffer, BUFFER_SIZE);
-		if (b_read == -1)
-			return (NULL);
-		else if (b_read == 0)
-			break ;
-		buffer[b_read] = 0;
-		if (!left)
-			left = ft_strdup("");
-		tmp = left;
-		left = ft_strjoin(tmp, buffer);
-		free(tmp);
-		tmp = NULL;
-		if (ft_strchr(buffer, '\n'))
-			break ;
-	}
-	return (left);
-}
-
-static char	*set_line(char *line)
-{
-	char	*left;
-	ssize_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0')
-		return (NULL);
-	left = ft_substr(line, i + 1, ft_strlen(line) - (i + 1));
-	if (!left)
-		return (NULL);
-	if (*left == '\0')
-	{
-		free(left);
-		left = NULL;
-	}
-	line[i + 1] = '\0';
-	return (left);
-}
-
 char	*get_next_line(int fd)
 {
-	static char	*left;
+	static char	*str;
 	char		*line;
-	char		*buffer;
+	char		*left;
+	size_t		i;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
+	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
-		free(left);
-		free(buffer);
-		left = NULL;
-		buffer = NULL;
 		return (NULL);
-	}
-	line = fill_line(fd, left, buffer);
+	str = ft_read(fd, str);
+	if (!str)
+		return (NULL);
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	line = ft_substr(str, 0, i);
 	if (!line)
 	{
-		free(left);
-		left = NULL;
+		free(str);
+		str = NULL;
 		return (NULL);
 	}
-	free(buffer);
-	buffer = NULL;
-	left = set_line(line);
-	return (line);
+	left = ft_substr(str, i, ft_strlen(str) - i);
+	return (free(str), str = left, line);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	int	fd;
+	char	*line;
+
+	fd = open("get_next_line_test.txt", O_RDONLY);
+	if (fd < 0)
+	{
+		perror("open");
+		return (1);
+	}
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
+ */
