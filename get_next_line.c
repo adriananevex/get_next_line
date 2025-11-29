@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: neves <neves@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:33 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/26 20:50:50 by aneves           ###   ########.fr       */
+/*   Updated: 2025/11/28 22:32:07 by neves            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static char	*set_line(char *line)
 		i++;
 	if (line[i] == '\0')
 		return (NULL);
-	while (line[j])
-		j++;
 	left = ft_substr(line, i + 1, ft_strlen(line) - (i + 1));
 	if (!left)
 		return (NULL);
