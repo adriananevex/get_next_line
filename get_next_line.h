@@ -6,7 +6,7 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:43 by aneves            #+#    #+#             */
-/*   Updated: 2025/11/29 17:59:24 by aneves           ###   ########.fr       */
+/*   Updated: 2025/12/01 15:11:17 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen_b(const char *str);
 
 char	*get_next_line(int fd);
-char	*ft_read(int fd, char *str);
 char	*ft_strchr(char *str, int c);
-char	*ft_strjoin(char *s1, const char *s2);
-char	*ft_substr(const char *str, size_t start, size_t len);
+char	*ft_join_b(char *line, char *str);
+
+void	ft_left(char *str);
 
 #endif
