@@ -6,7 +6,7 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:37 by aneves            #+#    #+#             */
-/*   Updated: 2025/12/01 16:47:37 by aneves           ###   ########.fr       */
+/*   Updated: 2025/12/03 21:12:30 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	*ft_strchr(char *str, int c)
 
 	i = 0;
 	d = (unsigned char)c;
+	if (!str)
+		return (NULL);
 	while (str[i])
 	{
 		if ((unsigned char)str[i] == d)

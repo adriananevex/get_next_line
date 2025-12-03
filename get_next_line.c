@@ -6,7 +6,7 @@
 /*   By: aneves <aneves@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 22:07:33 by aneves            #+#    #+#             */
-/*   Updated: 2025/12/01 15:42:41 by aneves           ###   ########.fr       */
+/*   Updated: 2025/12/03 21:09:37 by aneves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_next_line(int fd)
 {
 	static char	str[BUFFER_SIZE + 1];
 	char		*line;
-	ssize_t		n;
+	ssize_t		b;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -25,12 +25,12 @@ char	*get_next_line(int fd)
 	{
 		if (str[0] == '\0')
 		{
-			n = read(fd, str, BUFFER_SIZE);
-			if (n == -1)
+			b = read(fd, str, BUFFER_SIZE);
+			if (b == -1)
 				return (free(line), NULL);
-			if (n == 0)
+			if (b == 0)
 				return (line);
-			str[n] = '\0';
+			str[b] = '\0';
 		}
 		line = ft_join_b(line, str);
 		ft_left(str);
