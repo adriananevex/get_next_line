@@ -60,7 +60,7 @@ void    ft_set(char *str)
     i = ft_strlen_b(str);
     while (str[i])
         str[j++] = str[i++];
-    str[i] = '\0';
+    str[j] = '\0';
 }
 
 size_t  ft_strlen_b(const char *str)
