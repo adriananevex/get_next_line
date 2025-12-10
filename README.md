@@ -62,6 +62,7 @@ cc main.c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=42 && ./a.out
 
 The algorithm follows a classic and efficient structure for buffered line reading using a static internal buffer.
 
+
 1. Static Buffer
 
 A static array stores leftover bytes between calls.
@@ -72,6 +73,7 @@ A static array stores leftover bytes between calls.
 
 ✔ Required by the subject
 
+
 2. Buffered Reading
 
 Data is read from the file descriptor in chunks of BUFFER_SIZE only when the static buffer is empty.
@@ -79,6 +81,7 @@ Data is read from the file descriptor in chunks of BUFFER_SIZE only when the sta
 ✔ Reduces system calls
 
 ✔ Handles large files efficiently
+
 
 3. Line Assembly
 
@@ -88,6 +91,7 @@ The function ft_join_b() reallocates and concatenates previously stored data wit
 
 ✔ Handles arbitrarily long lines
 
+
 4. Stopping When a Line is Complete
 
 As soon as a newline (\n) is found inside the assembled line, the function returns promptly.
@@ -95,6 +99,7 @@ As soon as a newline (\n) is found inside the assembled line, the function retur
 ✔ Mimics standard line readers
 
 ✔ Prevents unnecessary reads
+
 
 5. Leftover Buffer Shift
 
@@ -106,13 +111,13 @@ After returning a complete line, ft_left() shifts the remaining characters after
 
 ### File Structure
 
-get_next_line.h
+- get_next_line.h
 
-get_next_line.c
+- get_next_line.c
 
-get_next_line_utils.c
+- get_next_line_utils.c
 
-README.md
+- README.md
 
 ## Resources
 
